@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+
+
 export const WeatherInfoIcons = {
     sunset: "./icon/temp.svg",
     sunrise: "./icon/temp.svg",
@@ -74,19 +76,22 @@ const InfoLabel = styled.span`
   }
 `;
 
-const WeatherInfoComponent = (props) => {
+const WeatherInfoComponent = ({name,value}) => {
+    
     return (
+        
         <InfoContainer>
-            <InfoIcon src={WeatherInfoIcons[props.name]}/>
+            <InfoIcon src={WeatherInfoIcons[name]}/>
             <InfoLabel>
-            {props.value}
-            <span>{props.name}</span>
+            {value}
+            <span>{name}</span>
             </InfoLabel>
         </InfoContainer>
     )
 }
 
 const WeatherComponent = (props) => {
+    // const [home, setHome] = useState("Home")
     const {weather} = props;
     const isDay = weather?.weather[0].icon?.includes("d");
     const getTime =(timeStamp) => {
@@ -95,6 +100,7 @@ const WeatherComponent = (props) => {
 
     return(
         <>
+            
             <WeatherCondition>
                 <Condition><span>{`${Math.floor(weather?.main?.temp - 273)}°C`}</span>
                  {` | ${weather?.weather[0].description}`}
@@ -111,6 +117,8 @@ const WeatherComponent = (props) => {
                 <WeatherInfoComponent name="humidity" value={weather?.main?.humidity}/>
                 <WeatherInfoComponent name="wind" value={weather?.wind?.speed}/>
                 <WeatherInfoComponent name="pressure" value={weather?.main?.pressure}/>
+
+
             </WeatherInfoContainer>
         </>
     )

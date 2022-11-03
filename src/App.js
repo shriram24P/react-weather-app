@@ -3,8 +3,22 @@ import React, {useState} from 'react'
 import styled from 'styled-components'
 import CityComponent from './modules/CityComponent';
 import WeatherComponent from './modules/WeatherInfoComponent';
+// import {link} from 'react-router-dom'
 
 const API_key = "268f0cbf658c574f4e7a83672ca6179e";
+
+const Home = styled.button`
+    background-color: #ADD8E6;
+    color: black;
+    margin: 30px auto;
+    border-radius: 5px;
+    cursor:pointer;
+    padding: 5px;
+    border: none;
+    :hover {
+      opacity: 0.5;
+    }
+`
 
 const Container = styled.div`
   display:flex;
@@ -30,6 +44,7 @@ const AppLabel = styled.span`
 function App() {
   const [city, updateCity] = useState();
   const [weather, updateweather] = useState();
+  // const [home, setHome] = useState({CityComponent})
 
   const fetchWeather = async (e) => {
     e.preventDefault();
@@ -39,12 +54,22 @@ updateweather(response.data);
 }
   return (
     <Container>
+     
      <AppLabel>React Weather App</AppLabel>
+     <a href="/">
+        <Home>
+          Home<span style={{ color: "var(--blue)" }}>.</span>
+        </Home>
+      </a>
      {weather? 
      (<WeatherComponent weather={weather}/>
      ): (
       <CityComponent updateCity={updateCity} fetchWeather={fetchWeather}/>
       )}
+
+      <div>
+        
+      </div>
     
     </Container>
   );
